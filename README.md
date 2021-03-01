@@ -104,6 +104,8 @@ Next we need to use Approov when we make request for the shapes. Only a single l
 
 Instead of using a default `OkHttpClient` we instead make the call using a client provided by the `ApproovService`. This automatically fetches an Approov token and adds it as a header to the request. It also pins the connection to the endpoint to ensure that no Man-in-the-Middle can eavesdrop on any communication being made.
 
+Run the app again to ensure that the `app-debug.apk` in the generated build outputs is up to date.
+
 ## REGISTER YOUR APP WITH APPROOV
 
 In order for Approov to recognize the app as being valid it needs to be registered with the service. Change directory to the top level of the `shapes-app` project and then register the app with Approov:
