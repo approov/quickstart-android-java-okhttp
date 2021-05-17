@@ -70,6 +70,8 @@ implementation 'com.github.approov:approov-service-okhttp:x.y.z'
 
 You can see the latest in the `README` at [`approov-service-okhttp`](https://github.com/approov/approov-service-okhttp).
 
+Make sure you do a Gradle sync (by selecting `Sync Now` in the banner at the top of the modified `.gradle` file) after making these changes.
+
 Note that `approov-service-okhttp` is actually an open source wrapper layer that allows you to easily use Approov with `OkHttp`. This has a further dependency to the closed source Approov SDK itself.
 
 ## ENSURE THE SHAPES API IS ADDED
