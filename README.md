@@ -2,6 +2,10 @@
 
 This quickstart is written specifically for native Android apps that are written in Java and use [`OkHttp`](https://square.github.io/okhttp/) for making the API calls that you wish to protect with Approov. If this is not your situation then check if there is a more relevant quickstart guide available.
 
+This quickstart provides a step-by-step example of integrating Approov into an app using a simple `Shapes` example that shows a geometric shape based on a request to an API backend that can be protected with Approov.
+
+It is also possible to use Approov in `Discovery` mode to perform an initial assessment of your app user base and whether there are requests being made to your backend API that are not coming from your mobile apps. This mode allows a simpler initial integration. If you wish to implement this first then follow the steps [here](https://github.com/approov/approov-service-okhttp) up to and including the `Discovery Mode` section.
+
 ## WHAT YOU WILL NEED
 * Access to a trial or paid Approov account
 * The `approov` command line tool [installed](https://approov.io/docs/latest/approov-installation/) with access to your account
@@ -76,18 +80,6 @@ approov api -add shapes.approov.io
 ```
 Tokens for this domain will be automatically signed with the specific secret for this domain, rather than the normal one for your account.
 
-## SETUP YOUR APPROOV CONFIGURATION
-
-The Approov SDK needs a configuration string to identify the account associated with the app. Obtain it using:
-```
-approov sdk -getConfig initial-config.txt
-```
-Copy and paste the `initial-config.txt` file content into a new created `approov_config` string resource entry as shown (the actual entry will be much longer than shown).
-
-![Initial Config String](readme-images/initial-config.png)
-
-The app reads this string to initialize the Approov SDK.
-
 ## MODIFY THE APP TO USE APPROOV
 
 Uncomment the three lines of Approov initialization code in `io/approov/shapes/ShapesApp.java`:
@@ -95,6 +87,13 @@ Uncomment the three lines of Approov initialization code in `io/approov/shapes/S
 ![Approov Initialization](readme-images/approov-init-code.png)
 
 This initializes Approov when the app is first created. It uses the configuration string we set earlier. A `public static` member allows other parts of the app to access the singleton Approov instance. All calls to `ApproovService` and the SDK itself are thread safe.
+
+The Approov SDK needs a configuration string to identify the account associated with the app. Obtain it using:
+
+```
+approov sdk -getConfigString
+```
+This will output a configuration string, something like `#123456#K/XPlLtfcwnWkzv99Wj5VmAxo4CrU267J1KlQyoz8Qo=`, that will identify your Approov account. Copy this into `io/approov/shapes/ShapesApp.java:36`, replacing the text `<enter-your-config-string-here>`.
 
 Next we need to use Approov when we make request for the shapes. Only a single line of code needs to be changed at `io/approov/shapes/MainActivity.java:137`:
 
