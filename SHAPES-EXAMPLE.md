@@ -1,4 +1,4 @@
-# Approov Quickstart: Android Java OkHttp
+# Shapes Example
 
 This quickstart is written specifically for native Android apps that are written in Java and use [`OkHttp`](https://square.github.io/okhttp/) for making the API calls that you wish to protect with Approov. This quickstart provides a detailed step-by-step example of integrating Approov into an app using a simple `Shapes` example that shows a geometric shape based on a request to an API backend that can be protected with Approov.
 
