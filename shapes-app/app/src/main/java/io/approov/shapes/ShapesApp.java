@@ -1,4 +1,3 @@
-// Application class for Approov Shapes App Demo (using OkHttp)
 //
 // MIT License
 //
@@ -22,7 +21,6 @@ import android.app.Application;
 
 // *** UNCOMMENT THE LINE BELOW FOR APPROOV ***
 //import io.approov.service.okhttp.ApproovService;
-
 
 public class ShapesApp extends Application {
     // *** UNCOMMENT THE LINE BELOW FOR APPROOV ***

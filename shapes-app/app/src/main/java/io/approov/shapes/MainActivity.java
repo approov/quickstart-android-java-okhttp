@@ -1,4 +1,3 @@
-// Main activity for Approov Shapes App Demo (using OkHttp)
 //
 // MIT License
 //
@@ -43,7 +42,7 @@ public class MainActivity extends Activity {
     private View statusView = null;
     private ImageView statusImageView = null;
     private TextView statusTextView = null;
-    private Button connectivityCheckButton = null;
+    private Button helloCheckButton = null;
     private Button shapesCheckButton = null;
 
     @Override
@@ -56,11 +55,11 @@ public class MainActivity extends Activity {
         statusView = findViewById(R.id.viewStatus);
         statusImageView = (ImageView) findViewById(R.id.imgStatus);
         statusTextView = findViewById(R.id.txtStatus);
-        connectivityCheckButton = findViewById(R.id.btnConnectionCheck);
+        helloCheckButton = findViewById(R.id.btnConnectionCheck);
         shapesCheckButton = findViewById(R.id.btnShapesCheck);
 
-        // handle connection check
-        connectivityCheckButton.setOnClickListener(new View.OnClickListener() {
+        // handle hello connection check
+        helloCheckButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 // hide status
@@ -78,11 +77,9 @@ public class MainActivity extends Activity {
                 client.newCall(request).enqueue(new Callback() {
                     @Override
                     public void onFailure(Call call, IOException e) {
-                        e.printStackTrace();
-                        Log.d(TAG, "Connectivity call failed");
+                        Log.d(TAG, "Hello call failed: " + e.getMessage());
                         final int imgId = R.drawable.confused;
                         final String msg = "Request failed: " + e.getMessage();
-
                         activity.runOnUiThread(new Runnable() {
                             @Override
                             public void run() {
@@ -98,10 +95,10 @@ public class MainActivity extends Activity {
                         final int imgId;
                         final String msg = "Http status code " + response.code();
                         if (response.isSuccessful()){
-                            Log.d(TAG,"Connectivity call successful");
+                            Log.d(TAG,"Hello call successful");
                             imgId = R.drawable.hello;
                         } else {
-                            Log.d(TAG,"Connectivity call unsuccessful");
+                            Log.d(TAG,"Hello call unsuccessful");
                             imgId = R.drawable.confused;
                         }
 
@@ -133,17 +130,20 @@ public class MainActivity extends Activity {
                 // *** COMMENT THE LINE BELOW FOR APPROOV ***
                 OkHttpClient client = new OkHttpClient();
 
+                // *** UNCOMMENT THE LINE BELOW FOR APPROOV USING SECRET PROTECTION ***
+                //ShapesApp.approovService.addSubstitutionHeader("Api-Key", null);
+
                 // *** UNCOMMENT THE LINE BELOW FOR APPROOV ***
                 //OkHttpClient client = ShapesApp.approovService.getOkHttpClient();
 
-                // create a new request
+                // create a new request including the API key to get Shapes
                 String url = getResources().getString(R.string.shapes_url);
-                Request request = new Request.Builder().url(url).build();
+                String apiKey = getResources().getString(R.string.shapes_api_key);
+                Request request = new Request.Builder().addHeader("Api-Key", apiKey).url(url).build();
                 client.newCall(request).enqueue(new Callback() {
                     @Override
                     public void onFailure(Call call, IOException e) {
-                        e.printStackTrace();
-                        Log.d(TAG, "Shapes call failed");
+                        Log.d(TAG, "Shapes call failed: " + e.getMessage());
                         final int imgId = R.drawable.confused;
                         final String msg = "Request failed: " + e.getMessage();
                         activity.runOnUiThread(new Runnable() {
