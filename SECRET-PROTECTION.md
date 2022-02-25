@@ -49,7 +49,7 @@ If the secret value is provided on the header `<secret-header>` then it is neces
 YourApp.approovService.addSubstitutionHeader("<secret-header>", null);
 ```
 
-With this in place the Approov interceptor should replace the `<secret-placeholder>` with the `<secret-value>` as required when the app passes attestation. Since the mapping lookup is performed on the placeholder value you have the flexibiluty of providing different secrets on different API calls, even if they passed with the same header name.
+With this in place the Approov interceptor should replace the `<secret-placeholder>` with the `<secret-value>` as required when the app passes attestation. Since the mapping lookup is performed on the placeholder value you have the flexibility of providing different secrets on different API calls, even if they passed with the same header name.
 
 Since earlier released versions of the app may have already leaked the `<secret-value>`, you may wish to refresh the secret at some later point when any older version of the app is no longer in use. You can of course do this update over-the-air using Approov without any need to modify the app.
 
