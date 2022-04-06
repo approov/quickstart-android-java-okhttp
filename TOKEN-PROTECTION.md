@@ -70,6 +70,12 @@ approov secstrings -setEnabled
 Here is an example of calling the appropriate method in `ApproovService`:
 
 ```Java
+import io.approov.service.okhttp.ApproovException;
+import io.approov.service.okhttp.ApproovNetworkException;
+import io.approov.service.okhttp.ApproovRejectionException;
+
+...
+
 try {
     YourApp.approovService.precheck();
 }
@@ -81,7 +87,7 @@ catch(ApproovNetworkException e) {
     // failure due to a potentially temporary networking issue, allow for a user initiated retry
 }
 catch(ApproovException e) {
-   // a more permanent error, see e.getMessage()
+   // a more permanent error, see e.message
 }
 // app has passed the precheck
 ```

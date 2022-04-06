@@ -94,7 +94,7 @@ The quickstart also provides the following additional methods:
 ### Header Prefixes
 In some cases the value to be substituted on a header may be prefixed by some fixed string. A common case is the presence of `Bearer` included in an authorization header to indicate the use of a bearer token. In this case you can specify a prefix as follows:
 
-```
+```Java
 YourApp.approovService.addSubstitutionHeader("Authorization", "Bearer ");
 ```
 
@@ -106,6 +106,13 @@ As shown, it is possible to set predefined secret strings that are only communic
 Here is an example of using the required method in `ApproovService`:
 
 ```Java
+import io.approov.service.okhttp.ApproovException;
+import io.approov.service.okhttp.ApproovNetworkException;
+import io.approov.service.okhttp.ApproovRejectionException;
+
+...
+
+
 String key;
 String newDef;
 String secret;
@@ -121,9 +128,9 @@ catch(ApproovNetworkException e) {
     // failure due to a potentially temporary networking issue, allow for a user initiated retry
 }
 catch(ApproovException e) {
-   // a more permanent error, see e.getMessage()
+   // a more permanent error, see e.message
 }
-// use `secret` as required, but never cache or store its value - note `secret` will be null if it is not defined
+// use `secret` as required, but never cache or store its value - note `secret` will be null if the provided key is not defined
 ```
 
 to lookup a secure string with the given `key`, returning `null` if it is not defined. Note that you should never cache this value in your code. Approov does the caching for you in a secure way. You may define a new value for the `key` by passing a new value in `newDef` rather than `null`. An empty string `newDef` is used to delete the secure string.
@@ -143,6 +150,12 @@ This initiates the process of fetching the required information as a background 
 You may wish to do an early check in your to present a warning to the user if the app is not going to be able to access secrets because it fails the attestation process. Here is an example of calling the appropriate method in `ApproovService`:
 
 ```Java
+import io.approov.service.okhttp.ApproovException;
+import io.approov.service.okhttp.ApproovNetworkException;
+import io.approov.service.okhttp.ApproovRejectionException;
+
+...
+
 try {
     YourApp.approovService.precheck();
 }
@@ -154,7 +167,7 @@ catch(ApproovNetworkException e) {
     // failure due to a potentially temporary networking issue, allow for a user initiated retry
 }
 catch(ApproovException e) {
-   // a more permanent error, see e.getMessage()
+   // a more permanent error, see e.message
 }
 // app has passed the precheck
 ```
