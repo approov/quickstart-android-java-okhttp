@@ -24,7 +24,7 @@ Secondly, add the dependency in your app's `build.gradle`:
 
 ```
 dependencies {
-	 implementation 'com.github.approov:approov-service-okhttp:3.0.3'
+	 implementation 'com.github.approov:approov-service-okhttp:3.0.4'
 }
 ```
 Make sure you do a Gradle sync (by selecting `Sync Now` in the banner at the top of the modified `.gradle` file) after making these changes.
@@ -63,6 +63,8 @@ public class YourApp extends Application {
 The `<enter-your-config-string-here>` is a custom string that configures your Approov account access. This will have been provided in your Approov onboarding email.
 
 This initializes Approov when the app is first created. A `public static` member allows other parts of the app to access the singleton Approov instance. All calls to `ApproovService` and the SDK itself are thread safe.
+
+It is possible to pass an empty string to indicate that no initialization is required. Only do this if you are also using a different Approov quickstart in your app (which will use the same underlying Approov SDK) and this will have been initialized first.
 
 ## USING APPROOV SERVICE
 You can then make Approov enabled `OkHttp` API calls by using the `OkHttpClient` available from the `ApproovService`:
