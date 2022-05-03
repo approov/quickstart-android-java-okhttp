@@ -45,11 +45,11 @@ void setProceedOnNetworkFail(boolean proceed);
 
 Note that this should be used with *CAUTION* because it may allow a connection to be established before any dynamic pins have been received via Approov, thus potentially opening the channel to a MitM.
 
-## SetTokenHeader
-Sets the `header` that the Approov token is added on, as well as an optional `prefix` String (such as "`Bearer `"). Set `prefix` to `null` if it is not required. By default the token is provided on `Approov-Token` with no prefix.
+## SetApproovHeader
+Sets the `header` that the Approov token is added on, as well as an optional `prefix` String (such as "`Bearer `"). Set `prefix` to the empty string if it is not required. By default the token is provided on `Approov-Token` with no prefix.
 
 ```Java
-void setTokenHeader(String header, String prefix);
+void setApproovHeader(String header, String prefix);
 ```
 
 ## SetBindingHeader
