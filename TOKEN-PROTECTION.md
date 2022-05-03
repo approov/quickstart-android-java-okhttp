@@ -29,8 +29,6 @@ Note, on Windows you need to substitute \ for / in the above command.
 
 See [Getting Started With Approov](https://approov.io/docs/latest/approov-usage-documentation/#getting-started-with-approov) for information about additional Approov features you may wish to try.
 
-The quickstart also provides the following additional methods:
-
 ### Changing Approov Token Header Name
 The default header name of `Approov-Token` can be changed as follows:
 
