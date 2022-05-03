@@ -36,6 +36,9 @@ import okhttp3.OkHttpClient;
 import okhttp3.Request;
 import okhttp3.Response;
 
+// *** UNCOMMENT THE LINE BELOW FOR APPROOV ***
+//import io.approov.service.okhttp.ApproovService;
+
 public class MainActivity extends Activity {
     private static final String TAG = MainActivity.class.getSimpleName();
     private Activity activity;
@@ -131,10 +134,10 @@ public class MainActivity extends Activity {
                 OkHttpClient client = new OkHttpClient();
 
                 // *** UNCOMMENT THE LINE BELOW FOR APPROOV USING SECRET PROTECTION ***
-                //ShapesApp.approovService.addSubstitutionHeader("Api-Key", null);
+                //ApproovService.addSubstitutionHeader("Api-Key", null);
 
                 // *** UNCOMMENT THE LINE BELOW FOR APPROOV ***
-                //OkHttpClient client = ShapesApp.approovService.getOkHttpClient();
+                //OkHttpClient client = ApproovService.getOkHttpClient();
 
                 // create a new request including the API key to get Shapes
                 String url = getResources().getString(R.string.shapes_url);

@@ -24,7 +24,7 @@ Secondly, add the dependency in your app's `build.gradle`:
 
 ```
 dependencies {
-	 implementation 'com.github.approov:approov-service-okhttp:3.0.4'
+	 implementation 'com.github.approov:approov-service-okhttp:3.0.5'
 }
 ```
 Make sure you do a Gradle sync (by selecting `Sync Now` in the banner at the top of the modified `.gradle` file) after making these changes.
@@ -50,19 +50,15 @@ In order to use the `ApproovService` you must initialize it when your app is cre
 import io.approov.service.okhttp.ApproovService;
 
 public class YourApp extends Application {
-    public static ApproovService approovService;
-
     @Override
     public void onCreate() {
         super.onCreate();
-        approovService = new ApproovService(getApplicationContext(), "<enter-your-config-string-here>");
+        ApproovService.initialize(getApplicationContext(), "<enter-your-config-string-here>");
     }
 }
 ```
 
 The `<enter-your-config-string-here>` is a custom string that configures your Approov account access. This will have been provided in your Approov onboarding email.
-
-This initializes Approov when the app is first created. A `public static` member allows other parts of the app to access the singleton Approov instance. All calls to `ApproovService` and the SDK itself are thread safe.
 
 It is possible to pass an empty string to indicate that no initialization is required. Only do this if you are also using a different Approov quickstart in your app (which will use the same underlying Approov SDK) and this will have been initialized first.
 
@@ -70,7 +66,7 @@ It is possible to pass an empty string to indicate that no initialization is req
 You can then make Approov enabled `OkHttp` API calls by using the `OkHttpClient` available from the `ApproovService`:
 
 ```Java
-OkHttpClient client = YourApp.approovService.getOkHttpClient();
+OkHttpClient client = ApproovService.getOkHttpClient();
 ```
 
 This obtains a cached client to be used for calls that includes an interceptor that protects channel integrity (with either pinning or managed trust roots). The interceptor may also add `Approov-Token` or substitute app secret values, depending upon your integration choices. You should thus use this client for all API calls you may wish to protect.
@@ -88,10 +84,10 @@ OkHttpClient client = new OkHttpClient.Builder().connectTimeout(5, TimeUnit.SECO
 Pass the modified builder to the `ApproovService` framework as follows:
 
 ```Java
-YourApp.approovService.setOkHttpClientBuilder(new OkHttpClient.Builder().connectTimeout(5, TimeUnit.SECONDS));
+ApproovService.setOkHttpClientBuilder(new OkHttpClient.Builder().connectTimeout(5, TimeUnit.SECONDS));
 ```
 
-This call only needs to be made once. Subsequent calls to `YourApp.approovService.getOkHttpClient()` will then always a `OkHttpClient` with the builder values included.
+This call only needs to be made once. Subsequent calls to `ApproovService.getOkHttpClient()` will then always a `OkHttpClient` with the builder values included.
 
 ## CHECKING IT WORKS
 Initially you won't have set which API domains to protect, so the interceptor will not add anything. It will have called Approov though and made contact with the Approov cloud service. You will see debug level logging from Approov saying `UNKNOWN_URL`.
@@ -106,3 +102,5 @@ To actually protect your APIs there are some further steps. Approov provides two
 * [SECRET PROTECTION](https://github.com/approov/quickstart-android-java-okhttp/blob/master/SECRET-PROTECTION.md): If you do not control the backend API(s) being protected, and are therefore unable to modify it to check Approov tokens, you can use this approach instead. It allows app secrets, and API keys, to be protected so that they no longer need to be included in the built code and are only made available to passing apps at runtime.
 
 Note that it is possible to use both approaches side-by-side in the same app, in case your app uses a mixture of 1st and 3rd party APIs.
+
+See [REFERENCE](https://github.com/approov/quickstart-android-java-okhttp/blob/master/REFERENCE.md) for a complete list of all of the `ApproovService` methods.

@@ -38,7 +38,7 @@ The subsequent steps of this guide show you how to provide better protection, ei
 
 ## ADD THE APPROOV DEPENDENCY
 
-The Approov integration is available via [`jitpack`](https://jitpack.io). This allows inclusion into the project by simply specifying a dependency in the `gradle` files for the app. Firstly, `jitpack` needs to be added as follows to the end the `repositories` section in the `build.gradle:20` file at the top level of the project:
+The Approov integration is available via [`jitpack`](https://jitpack.io). This allows inclusion into the project by simply specifying a dependency in the `gradle` files for the app. Firstly, `jitpack` needs to be added as follows to the end the `repositories` section in the `build.gradle` file at the top level of the project:
 
 ```
 maven { url 'https://jitpack.io' }
@@ -46,14 +46,14 @@ maven { url 'https://jitpack.io' }
 
 ![Project Build Gradle](readme-images/root-gradle.png)
 
-The `approov-service-okhttp` dependency needs to be added as follows to the `app/build.gradle:37` at the app level:
+The `approov-service-okhttp` dependency needs to be added as follows to the `app/build.gradle` at the app level:
 
 ![App Build Gradle](readme-images/app-gradle.png)
 
 Note that in this case the dependency has been added with the tag `main-SNAPSHOT`. We recommend you add a dependency to a specific version:
 
 ```
-implementation 'com.github.approov:approov-service-okhttp:3.0.4'
+implementation 'com.github.approov:approov-service-okhttp:3.0.5'
 ```
 
 Make sure you do a Gradle sync (by selecting `Sync Now` in the banner at the top of the modified `.gradle` file) after making these changes.
@@ -70,17 +70,19 @@ Note that any Approov tokens for this domain will be automatically signed with t
 
 ## MODIFY THE APP TO USE APPROOV
 
-Uncomment the three lines of Approov initialization code in `io/approov/shapes/ShapesApp.java`:
+Uncomment the Approov initialization code in `io/approov/shapes/ShapesApp.java`:
 
 ![Approov Initialization](readme-images/approov-init-code.png)
 
 The Approov SDK needs a configuration string to identify the account associated with the app. It will have been provided in the Approov onboarding email (it will be something like `#123456#K/XPlLtfcwnWkzv99Wj5VmAxo4CrU267J1KlQyoz8Qo=`). Copy this into `io/approov/shapes/ShapesApp.java:34`, replacing the text `<enter-your-config-string-here>`.
 
-Next we need to use Approov when we make request for the shapes. Only a single line of code needs to be changed at `io/approov/shapes/MainActivity.java:137`:
+Next we need to use Approov when we make request for the shapes. Uncomment the code in `io/approov/shapes/MainActivity.java`:
 
 ![Approov Fetch](readme-images/approov-fetch.png)
 
-> **NOTE:** Don't forget to comment out the previous line, the one using the standard OkHttpClient().
+> **NOTE:** Don't forget to comment out the previous line, the one using the standard `OkHttpClient()`.
+
+You will also need to uncomment the `ApproovService` import line near the start of the file.
 
 Instead of using a default `OkHttpClient` we instead make the call using a client provided by the `ApproovService`. This automatically fetches an Approov token and adds it as a header to the request. It also pins the connection to the endpoint to ensure that no Man-in-the-Middle can eavesdrop on any communication being made.
 
@@ -125,7 +127,9 @@ If you don't get a valid shape then there are some things you can try. Remember 
 
 ## SHAPES APP WITH SECRET PROTECTION
 
-This section provides an illustration of an alternative option for Approov protection if you are not able to modify the backend to add an Approov Token check. Firstly, revert any previous change to `res/values/strings.xml` to using `https://shapes.approov.io/v1/shapes/` that simply checks for an API key. The `shapes_api_key` should also be changed to `shapes_api_key_placeholder`, removing the actual API key out of the code:
+This section provides an illustration of an alternative option for Approov protection if you are not able to modify the backend to add an Approov Token check. 
+
+Firstly, revert any previous change to `res/values/strings.xml` to using `https://shapes.approov.io/v1/shapes/` that simply checks for an API key. The `shapes_api_key` should also be changed to `shapes_api_key_placeholder`, removing the actual API key out of the code:
 
 ![Shapes V1 Endpoint](readme-images/shapes-v1-endpoint.png)
 
@@ -145,7 +149,7 @@ approov secstrings -addKey shapes_api_key_placeholder -predefinedValue yXClypapW
 
 > Note that this command also requires an [admin role](https://approov.io/docs/latest/approov-usage-documentation/#account-access-roles).
 
-Next we need to inform Approov that it needs to substitute the placeholder value for the real API key on the `Api-Key` header. Only a single line of code needs to be changed at `io/approov/shapes/MainActivity.java:134`:
+Next we need to inform Approov that it needs to substitute the placeholder value for the real API key on the `Api-Key` header. Only a single line of code needs to be changed in `io/approov/shapes/MainActivity.java`:
 
 ![Approov Substitute Header](readme-images/approov-subs-header.png)
 

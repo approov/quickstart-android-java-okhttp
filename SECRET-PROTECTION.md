@@ -51,7 +51,7 @@ You can add up to 16 different secret values to be substituted in this way.
 If the secret value is provided on the header `<secret-header>` then it is necessary to notify the `ApproovService` that the header is subject to substitution. You do this by making the call once, after initialization:
 
 ```Java
-YourApp.approovService.addSubstitutionHeader("<secret-header>", null);
+ApproovService.addSubstitutionHeader("<secret-header>", null);
 ```
 
 With this in place the Approov interceptor should replace the `<secret-placeholder>` with the `<secret-value>` as required when the app passes attestation. Since the mapping lookup is performed on the placeholder value you have the flexibility of providing different secrets on different API calls, even if they passed with the same header name.
@@ -61,7 +61,7 @@ Since earlier released versions of the app may have already leaked the `<secret-
 If the secret value is provided as a parameter in a URL query string with the name `<secret-param>` then it is necessary to notify the `ApproovService` that the query parameter is subject to substitution. You do this by making the call once, after initialization:
 
 ```Java
-YourApp.approovService.addSubstitutionQueryParam("<secret-param>");
+ApproovService.addSubstitutionQueryParam("<secret-param>");
 ```
 
 After this the Approov interceptor should transform any instance of a URL such as `https://mydomain.com/endpoint?<secret-param>=<secret-placeholder>` into `https://mydomain.com/endpoint?<secret-param>=<secret-value>`, if the app passes attestation and there is a secure string with the name `<secret-placeholder>`.
@@ -103,7 +103,7 @@ The quickstart also provides the following additional methods:
 In some cases the value to be substituted on a header may be prefixed by some fixed string. A common case is the presence of `Bearer` included in an authorization header to indicate the use of a bearer token. In this case you can specify a prefix as follows:
 
 ```Java
-YourApp.approovService.addSubstitutionHeader("Authorization", "Bearer ");
+ApproovService.addSubstitutionHeader("Authorization", "Bearer ");
 ```
 
 This causes the `Bearer` prefix to be stripped before doing the lookup for the substitution, and the `Bearer` prefix added to the actual secret value as part of the substitution.
@@ -126,7 +126,7 @@ String newDef;
 String secret;
 // define key and newDef here
 try {
-    secret = YourApp.approovService.fetchSecureString(key, newDef);
+    secret = ApproovService.fetchSecureString(key, newDef);
 }
 catch(ApproovRejectionException e) {
     // failure due to the attestation being rejected, e.getARC() and e.getRejectionReasons() may be used to present information to the user
@@ -136,7 +136,7 @@ catch(ApproovNetworkException e) {
     // failure due to a potentially temporary networking issue, allow for a user initiated retry
 }
 catch(ApproovException e) {
-   // a more permanent error, see e.message
+   // a more permanent error, see e.getMessage()
 }
 // use `secret` as required, but never cache or store its value - note `secret` will be null if the provided key is not defined
 ```
@@ -149,7 +149,7 @@ This method is also useful for providing runtime secrets protection when the val
 If you wish to reduce the latency associated with substituting the first secret, then make this call immediately after creating `ApproovService`:
 
 ```Java
-YourApp.approovService.prefetch()
+ApproovService.prefetch()
 ```
 
 This initiates the process of fetching the required information as a background task, so that it is available immediately when subsequently needed. Note the information will automatically expire after approximately 5 minutes.
@@ -165,7 +165,7 @@ import io.approov.service.okhttp.ApproovRejectionException;
 ...
 
 try {
-    YourApp.approovService.precheck();
+    ApproovService.precheck();
 }
 catch(ApproovRejectionException e) {
     // failure due to the attestation being rejected, e.getARC() and e.getRejectionReasons() may be used to present information to the user
@@ -175,7 +175,7 @@ catch(ApproovNetworkException e) {
     // failure due to a potentially temporary networking issue, allow for a user initiated retry
 }
 catch(ApproovException e) {
-   // a more permanent error, see e.message
+   // a more permanent error, see e.getMessage()
 }
 // app has passed the precheck
 ```

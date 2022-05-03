@@ -23,14 +23,11 @@ import android.app.Application;
 //import io.approov.service.okhttp.ApproovService;
 
 public class ShapesApp extends Application {
-    // *** UNCOMMENT THE LINE BELOW FOR APPROOV ***
-    //public static ApproovService approovService;
-
     @Override
     public void onCreate() {
         super.onCreate();
 
         // *** UNCOMMENT THE LINE BELOW FOR APPROOV ***
-        //approovService = new ApproovService(getApplicationContext(), "<enter-your-config-string-here>");
+        //ApproovService.initialize(getApplicationContext(), "<enter-your-config-string-here>");
     }
 }
