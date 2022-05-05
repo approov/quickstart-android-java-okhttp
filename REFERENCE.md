@@ -107,7 +107,7 @@ void removeExclusionURLRegex(String urlRegex)
 Performs a fetch to lower the effective latency of a subsequent token fetch or secure string fetch by starting the operation earlier so the subsequent fetch may be able to use cached data. This initiates the prefetch in a background thread.
 
 ```Java
-void prefetch();
+void prefetch()
 ```
 
 ## Precheck
