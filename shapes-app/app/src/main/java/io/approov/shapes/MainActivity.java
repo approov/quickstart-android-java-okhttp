@@ -133,7 +133,7 @@ public class MainActivity extends Activity {
                 // *** COMMENT THE LINE BELOW FOR APPROOV ***
                 OkHttpClient client = new OkHttpClient();
 
-                // *** UNCOMMENT THE LINE BELOW FOR APPROOV USING SECRET PROTECTION ***
+                // *** UNCOMMENT THE LINE BELOW FOR APPROOV USING SECRETS PROTECTION ***
                 //ApproovService.addSubstitutionHeader("Api-Key", null);
 
                 // *** UNCOMMENT THE LINE BELOW FOR APPROOV ***
