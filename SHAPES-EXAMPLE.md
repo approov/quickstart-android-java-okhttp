@@ -74,7 +74,7 @@ Uncomment the Approov initialization code in `io/approov/shapes/ShapesApp.java`:
 
 ![Approov Initialization](readme-images/approov-init-code.png)
 
-The Approov SDK needs a configuration string to identify the account associated with the app. It will have been provided in the Approov onboarding email (it will be something like `#123456#K/XPlLtfcwnWkzv99Wj5VmAxo4CrU267J1KlQyoz8Qo=`). Copy this into `io/approov/shapes/ShapesApp.java:34`, replacing the text `<enter-your-config-string-here>`.
+The Approov SDK needs a configuration string to identify the account associated with the app. It will have been provided in the Approov onboarding email (it will be something like `#123456#K/XPlLtfcwnWkzv99Wj5VmAxo4CrU267J1KlQyoz8Qo=`). Copy this and use it to replace the text `<enter-your-config-string-here>`.
 
 Next we need to use Approov when we make request for the shapes. Uncomment the code in `io/approov/shapes/MainActivity.java`:
 
