@@ -60,8 +60,6 @@ public class YourApp extends Application {
 
 The `<enter-your-config-string-here>` is a custom string that configures your Approov account access. This will have been provided in your Approov onboarding email.
 
-It is possible to pass an empty string to indicate that no initialization is required. Only do this if you are also using a different Approov quickstart in your app (which will use the same underlying Approov SDK) and this will have been initialized first.
-
 ## USING APPROOV SERVICE
 You can then make Approov enabled `OkHttp` API calls by using the `OkHttpClient` available from the `ApproovService`:
 
