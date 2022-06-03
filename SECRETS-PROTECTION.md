@@ -66,7 +66,7 @@ If the secret value is provided as a parameter in a URL query string with the na
 ApproovService.addSubstitutionQueryParam("your-param");
 ```
 
-After this the Approov interceptor should transform any instance of a URL such as `https://mydomain.com/endpoint?your-param=your-placeholder` into `https://mydomain.com/endpoint?your-param=your-secret`, if the app passes attestation and there is a secure string with the name `your-placeholder`.
+After this the Approov interceptor should transform any instance of a URL such as `https://your.domain/endpoint?your-param=your-placeholder` into `https://your.domain/endpoint?your-param=your-secret`.
 
 ## REGISTERING APPS
 In order for Approov to recognize the app as being valid it needs to be registered with the service. Change the directory to the top level of your app project and then register the app with Approov:
