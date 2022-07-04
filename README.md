@@ -69,7 +69,7 @@ OkHttpClient client = ApproovService.getOkHttpClient();
 
 This obtains a cached client to be used for calls that includes an interceptor that protects channel integrity (with either pinning or managed trust roots). The interceptor may also add `Approov-Token` or substitute app secret values, depending upon your integration choices. You should thus use this client for all API calls you may wish to protect.
 
-You must always call this method whenever you want to make a request to ensure that you are using the most up to date client. Failure to do this will mean that the app is not able to dynamically change its pins.
+You **must** always call this method whenever you want to make a request to ensure that you are using the most up to date client. *Failure to do this will mean that the app is not able to dynamically change its pins.*
 
 Approov errors will generate an `ApproovException`, which is a type of `IOException`. This may be further specialized into an `ApproovNetworkException`, indicating an issue with networking that should provide an option for a user initiated retry (which must make the new request with a call to the `getOkHttpClient` to get the latest client).
 
