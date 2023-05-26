@@ -148,7 +148,7 @@ This causes the `Bearer` prefix to be stripped before doing the lookup for the s
 ### App Instance Secure Strings
 In addition to secret values defined in the Approov cloud, it is also possible to get and set secure string values independently for each app instance. These are never communicated to the Approov cloud service, but are encrypted at rest using keys which can only be retrieved by passing apps. You can use this feature to protect user authorization tokens issued to individual apps or other sensitive customer data, for instance.
 
-App instance secure strings can be set and retrived using the [secret fetching code](#obtaining-the-secret-explicity). You can define a new value for a given secret name by passing a value in the second parameter of `fetchSecureString`, rather than `null`. An empty string may be used to delete the secure string completely.
+App instance secure strings can be set and retrived using the [secret fetching code](#obtaining-the-secret-explicitly). You can define a new value for a given secret name by passing a value in the second parameter of `fetchSecureString`, rather than `null`. An empty string may be used to delete the secure string completely.
 
 ### Prefetching
 If you wish to reduce the latency associated with substituting the first secret, then make this call immediately after initializing `ApproovService`:
