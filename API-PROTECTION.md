@@ -29,6 +29,15 @@ See [Android App Signing Certificates](https://approov.io/docs/latest/approov-us
 ## FURTHER OPTIONS
 See [Exploring Other Approov Features](https://approov.io/docs/latest/approov-usage-documentation/#exploring-other-approov-features) for information about additional Approov features you may wish to try.
 
+### Development Key
+You may wish to [set a development key](https://approov.io/docs/latest/approov-usage-documentation/#using-a-development-key) in order to force an app to be passed, if it may be resigned by a different app signing certificate to which you don't have access. Perform the call:
+
+```Java
+ApproovService.setDevKey("uDW9FuLVpL1_4zo1");
+```
+
+See [using a development key](https://approov.io/docs/latest/approov-usage-documentation/#using-a-development-key) to understand how to obtain the development key which is the parameter to the call.
+
 ### Changing Approov Token Header Name
 The default header name of `Approov-Token` can be changed as follows:
 

@@ -146,7 +146,7 @@ Next we need to inform Approov that it needs to substitute the placeholder value
 
 ![Approov Substitute Header](readme-images/approov-subs-header.png)
 
-Run the app again without making any changes to the app and press the `Get Shape` button. You should now see this (or another shape):
+Build and run the app again and press the `Get Shape` button. You should now see this (or another shape):
 
 <p>
     <img src="readme-images/shapes-good.png" width="256" title="Shapes Good">
