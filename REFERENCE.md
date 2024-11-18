@@ -24,19 +24,32 @@ It is possible to pass an empty `config` string to indicate that no initializati
 
 
 ## GetOkHttpClient
-Gets the `OkHttpClient` that enables the Approov service. This adds the Approov token in a header to requests, performs and header or query parameter substitutions and also pins the connections. The `OkHttpClient` is constructed lazily on demand but is cached if there are no changes. You *MUST* always obtain the `OkHttpClient` using this method for all requests, to ensure an up to date client is used with the latest dynamic pins.
+Gets the default `OkHttpClient` that enables the Approov service. This adds the Approov token in a header to requests, performs and header or query parameter substitutions and also pins the connections. The `OkHttpClient` is constructed lazily on demand but is cached if there are no changes. You *MUST* always obtain the `OkHttpClient` using this method for all requests, to ensure an up to date client is used with the latest dynamic pins.
 
 ```Java
 OkHttpClient getOkHttpClient()
 ```
 
-If Approov has not been initialized, then this provides an `OkHttpClient` without any Approov protection. Use `setOkHttpClientBuilder` to provide any special properties.
+If Approov has not been initialized, then this provides an `OkHttpClient` without any Approov protection.
+
+Use `setOkHttpClientBuilder` to provide any special builder properties. If you wish to use multiple different builders in your application you can set them by also providing a builder name to `setOkHttpClientBuilder`. In this case you get an `OkHttpClient` using a specific builder using:
+
+
+```Java
+OkHttpClient getOkHttpClient(String builderName)
+```
 
 ## SetOkHttpClientBuilder
-Sets the `OkHttpClient.Builder` to be used for constructing the Approov `OkHttpClient`. This allows a custom configuration to be set, with additional interceptors and properties.
+Sets the `OkHttpClient.Builder` to be used for constructing the default Approov `OkHttpClient`. This allows a custom configuration to be set, with additional interceptors and properties.
 
 ```Java
 void setOkHttpClientBuilder(OkHttpClient.Builder builder)
+```
+
+Additionally, it is also possible to set a custom named builder to allow multiple builders within the same application. Use:
+
+```Java
+void setOkHttpClientBuilder(String builderName, OkHttpClient.Builder builder)
 ```
 
 ## SetProceedOnNetworkFail

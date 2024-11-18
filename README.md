@@ -87,6 +87,18 @@ ApproovService.setOkHttpClientBuilder(new OkHttpClient.Builder().connectTimeout(
 
 This call only needs to be made once. Subsequent calls to `ApproovService.getOkHttpClient()` will then always a `OkHttpClient` with the builder values included.
 
+If you need multiple different builders in your application, with different configurations, then this is possible with named builders. This is an example of how to set one:
+
+```Java
+ApproovService.setOkHttpClientBuilder("short-timeout", new OkHttpClient.Builder().connectTimeout(5, TimeUnit.SECONDS));
+```
+
+Then in order to obtain a client using that builder use:
+
+```Java
+OkHttpClient client = ApproovService.getOkHttpClient("short-timeout");
+```
+
 ## CHECKING IT WORKS
 Initially you won't have set which API domains to protect, so the interceptor will not add anything. It will have called Approov though and made contact with the Approov cloud service. You will see debug level logging from Approov saying `UNKNOWN_URL`.
 
