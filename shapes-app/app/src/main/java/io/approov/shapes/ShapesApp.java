@@ -19,15 +19,11 @@ package io.approov.shapes;
 
 import android.app.Application;
 
-// *** UNCOMMENT THE LINE BELOW FOR APPROOV ***
-//import io.approov.service.okhttp.ApproovService;
 
 public class ShapesApp extends Application {
     @Override
     public void onCreate() {
         super.onCreate();
 
-        // *** UNCOMMENT THE LINE BELOW FOR APPROOV ***
-        //ApproovService.initialize(getApplicationContext(), "<enter-your-config-string-here>");
     }
 }

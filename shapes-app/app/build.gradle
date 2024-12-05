@@ -1,21 +1,40 @@
 apply plugin: 'com.android.application'
 
 android {
-    compileSdkVersion 31
+    namespace 'io.approov.shapes'
+    compileSdk 33
+    lint {
+        baseline = file("lint-baseline.xml")
+    }
     defaultConfig {
         applicationId "io.approov.shapes"
-        minSdkVersion 21
-        targetSdkVersion 31
-        versionCode  3
+        minSdkVersion 27
+        targetSdkVersion 33
+        versionCode 3
         versionName "3.0"
+    }
+    signingConfigs {
+        release {
+            // Use 512
+            storeFile file("/Users/ivol/Keys/release-sha512.jks")
+            storePassword "123456"
+            keyAlias "r"
+            keyPassword "123456"
+            v1SigningEnabled true
+            v2SigningEnabled true
+            enableV3Signing = true
+            enableV4Signing = true
+
+        }
     }
     buildTypes {
         debug {
             minifyEnabled false
         }
         release {
-            minifyEnabled true
+            minifyEnabled false
             proguardFiles.add(file("proguard-rules.pro"))
+            signingConfig signingConfigs.release
         }
     }
     packagingOptions {
@@ -23,11 +42,9 @@ android {
             excludes += ['META-INF/notice.txt', 'META-INF/license.txt']
         }
     }
-    android {
-        compileOptions {
-            sourceCompatibility JavaVersion.VERSION_1_8
-            targetCompatibility JavaVersion.VERSION_1_8
-        }
+    compileOptions { // Fixed the duplicate `android` block issue
+        sourceCompatibility JavaVersion.VERSION_1_8
+        targetCompatibility JavaVersion.VERSION_1_8
     }
 }
 
@@ -35,4 +52,5 @@ dependencies {
     implementation fileTree(dir: 'libs', include: ['*.jar'])
     implementation 'androidx.appcompat:appcompat:1.4.1'
     implementation 'com.squareup.okhttp3:okhttp:4.12.0'
+    implementation 'dnsjava:dnsjava:3.3.0'
 }
