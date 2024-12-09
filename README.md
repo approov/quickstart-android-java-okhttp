@@ -72,7 +72,7 @@ The `<enter-your-config-string-here>` is a custom string that configures your Ap
 ## USING APPROOV SERVICE
 
 > [!WARNING]
-> You MUST never reuse an OkHttpClient object but instead obtain one from the ApproovService BEFORE making a request
+> **You MUST never reuse an OkHttpClient object but instead obtain one from the ApproovService BEFORE making a request**
 >
 > You can then make Approov enabled `OkHttp` API calls by using the `OkHttpClient` available from the `ApproovService`: 
 
