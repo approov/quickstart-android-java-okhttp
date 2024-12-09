@@ -70,7 +70,11 @@ public class YourApp extends Application {
 The `<enter-your-config-string-here>` is a custom string that configures your Approov account access. This will have been provided in your Approov onboarding email.
 
 ## USING APPROOV SERVICE
-You can then make Approov enabled `OkHttp` API calls by using the `OkHttpClient` available from the `ApproovService`:
+
+> [!WARNING]
+> You MUST never reuse an OkHttpClient object but instead obtain one from the ApproovService BEFORE making a request
+>
+> You can then make Approov enabled `OkHttp` API calls by using the `OkHttpClient` available from the `ApproovService`: 
 
 ```Java
 OkHttpClient client = ApproovService.getOkHttpClient();
