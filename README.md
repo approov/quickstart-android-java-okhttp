@@ -6,38 +6,18 @@ This page provides all the steps for integrating Approov into your app. Addition
 
 To follow this guide you should have received an onboarding email for a trial or paid Approov account.
 
-## ADDING APPROOV SERVICE DEPENDENCY USING JITPACK
-The Approov integration is available via [`jitpack`](https://jitpack.io). This allows inclusion into the project by simply specifying a dependency in the `gradle` files for the app.
-
-Firstly, `jitpack` needs to be added to the end the `repositories` section in the `build.gradle` file at the top root level of the project:
-
-```
-allprojects {
-    repositories {
-        ...
-        maven { url 'https://jitpack.io' }
-    }
-}
-```
-
-Secondly, add the dependency in your app's `build.gradle`:
-
-```
-dependencies {
-	 implementation 'com.github.approov:approov-service-okhttp:3.2.3'
-}
-```
-Make sure you do a Gradle sync (by selecting `Sync Now` in the banner at the top of the modified `.gradle` file) after making these changes.
-
-This package is actually an open source wrapper layer that allows you to easily use Approov with `OkHttp`. This has a further dependency to the closed source [Approov SDK](https://github.com/approov/approov-android-sdk).
-
-## ADDING APPROOV SERVICE DEPENDENCY USING MAVEN
-
+## ADDING APPROOV SERVICE DEPENDENCY
+The Approov integration is available via [`maven`](https://mvnrepository.com/repos/central). This allows inclusion into the project by simply specifying a dependency in the `gradle` files for the app.
 The `Maven` repository is already present in the gradle.build file so the only import you need to make is the actual service layer itself:
 
 ```
-implementation("io.approov:service.okhttp:3.2.3")
+implementation("io.approov:service.okhttp:3.3.1")
 ```
+
+
+Make sure you do a Gradle sync (by selecting `Sync Now` in the banner at the top of the modified `.gradle` file) after making these changes.
+
+This package is actually an open source wrapper layer that allows you to easily use Approov with `OkHttp`. This has a further dependency to the closed source [Approov SDK](https://central.sonatype.com/artifact/io.approov/approov-android-sdk/3.3.0).
 
 
 ## MANIFEST CHANGES

@@ -38,29 +38,16 @@ The subsequent steps of this guide show you how to provide better protection, ei
 
 ## ADD THE APPROOV DEPENDENCY
 
-The Approov integration is available either via [`jitpack`](https://jitpack.io) or Maven. This allows inclusion into the project by simply specifying a dependency in the `gradle` files for the app. 
-If you prefer using Maven you do not need to add external repository reference. If you prefer using `jitpack`, `jitpack` needs to be added as follows to the end the `repositories` section in the `build.gradle` file at the top level of the project:
-
-```
-maven { url 'https://jitpack.io' }
-```
-
-![Project Build Gradle](readme-images/root-gradle.png)
-
+The Approov integration is available via Maven. This allows inclusion into the project by simply specifying a dependency in the `gradle` files for the app. 
 The `approov-service-okhttp` dependency needs to be added as follows to the `app/build.gradle` at the app level:
 
 ![App Build Gradle](readme-images/app-gradle.png)
 
-Note that in this case the dependency has been added with the tag `main-SNAPSHOT`. We recommend you add a dependency to a specific version:
+
+The `Maven` dependency reference is
 
 ```
-implementation 'com.github.approov:approov-service-okhttp:3.2.3'
-```
-
-The `Maven` dependency reference is slightly different:
-
-```
-implementation("io.approov:service.okhttp:3.2.3")
+implementation("io.approov:service.okhttp:3.3.1")
 ```
 
 Make sure you do a Gradle sync (by selecting `Sync Now` in the banner at the top of the modified `.gradle` file) after making these changes.
