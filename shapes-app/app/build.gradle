@@ -10,7 +10,7 @@ android {
 
     defaultConfig {
         applicationId "io.approov.shapes.java_okhttp"
-        minSdk 21
+        minSdk 23
         targetSdk 35
         versionCode 4
         versionName "3.4"
@@ -42,7 +42,6 @@ android {
 }
 
 dependencies {
-
     implementation libs.androidx.core.ktx
     implementation libs.androidx.lifecycle.runtime.ktx
     implementation libs.androidx.activity.compose
