@@ -8,7 +8,7 @@ This quickstart is written specifically for native Android apps that are written
 * [Android Studio](https://developer.android.com/studio) installed (Android Studio Bumblebee 2021.1.1 is used in this guide)
 * The contents of this repo
 
-## RUNNING THE SHAPES APP WITHOUT APPROOV
+## RUN THE SHAPES APP WITHOUT APPROOV
 
 Open the project in the `shapes-app` folder using `File->Open` in Android Studio. Run the app as follows:
 
@@ -38,19 +38,18 @@ The subsequent steps of this guide show you how to provide better protection, ei
 
 ## ADD THE APPROOV DEPENDENCY
 
-The Approov integration is available via Maven. This allows inclusion into the project by simply specifying a dependency in the `gradle` files for the app. 
+The Approov integration is available via Maven. This allows inclusion into the project by simply specifying a dependency in the `build.gradle` files for the app. 
 The `approov-service-okhttp` dependency needs to be added as follows to the `app/build.gradle` at the app level:
 
 ![App Build Gradle](readme-images/app-gradle.png)
 
-
 The `Maven` dependency reference is
 
 ```
-implementation("io.approov:service.okhttp:3.3.1")
+implementation("io.approov:service.okhttp:3.4.0")
 ```
 
-Make sure you do a Gradle sync (by selecting `Sync Now` in the banner at the top of the modified `.gradle` file) after making these changes.
+Make sure you do a Gradle sync (by selecting `Sync Now` in the banner at the top of the modified `build.gradle` file) after making these changes.
 
 Note that `approov-service-okhttp` is actually an open source wrapper layer that allows you to easily use Approov with `OkHttp`. This has a further dependency to the closed source Approov SDK itself.
 
@@ -118,6 +117,32 @@ If you don't get a valid shape then there are some things you can try. Remember 
 * Use `approov metrics` to see [Live Metrics](https://approov.io/docs/latest/approov-usage-documentation/#metrics-graphs) of the cause of failure.
 * You can use a debugger or emulator and get valid Approov tokens on a specific device by ensuring you are [forcing a device ID to pass](https://approov.io/docs/latest/approov-usage-documentation/#forcing-a-device-id-to-pass). As a shortcut, you can use the `latest` as discussed so that the `device ID` doesn't need to be extracted from the logs or an Approov token.
 * Also, you can use a debugger or Android emulator and get valid Approov tokens on any device if you [mark the signing certificate as being for development](https://approov.io/docs/latest/approov-usage-documentation/#development-app-signing-certificates).
+
+## SHAPES APP WITH INSTALLATION MESSAGE SIGNING
+
+This section shows how to add message signing as an additional layer of protection in addition to an Approov token.
+
+1. Edit the `res/values/strings.xml` file to using the shapes `https://shapes.approov.io/v5/shapes/` endpoint. The v5 endpoint performs a message signature check in addition to the Approov token check.
+
+![Shapes V5 Endpoint](readme-images/shapes-v5-endpoint.png)
+
+2. Uncomment the message signing setup code in `io/approov/shapes/ShapesApp.java`. This adds an interceptor extension to the ApproovService which adds the message signature to the request automatically.
+
+![Approov Initialization](readme-images/approov-msgsign-setup-code.png)
+
+3. Configure Approov to add the public message signing key to the approov token. This key is used by the v5 endpoint to perform its message signature check.
+
+```
+approov policy -setInstallPubKey on
+```
+
+4. Build and run the app again and press the `Get Shape` button. You should see this (or another shape):
+
+<p>
+    <img src="readme-images/shapes-good.png" width="256" title="Shapes Good">
+</p>
+
+This indicates that in addition to the app obtaining a validly signed Approov token, the message also has a valid signature.
 
 ## SHAPES APP WITH SECRETS PROTECTION
 

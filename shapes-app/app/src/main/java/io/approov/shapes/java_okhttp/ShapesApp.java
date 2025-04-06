@@ -22,7 +22,7 @@ import android.app.Application;
 // *** UNCOMMENT THE LINE BELOW FOR APPROOV ***
 //import io.approov.service.okhttp.ApproovService;
 
-// *** UNCOMMENT THE LINE BELOW FOR APPROOV WITH INSTALLATION MESSAGE SIGNING***
+// *** UNCOMMENT THE LINE BELOW FOR APPROOV WITH INSTALLATION MESSAGE SIGNING ***
 //import io.approov.service.okhttp.ApproovDefaultMessageSigning;
 
 public class ShapesApp extends Application {
@@ -33,7 +33,7 @@ public class ShapesApp extends Application {
         // *** UNCOMMENT THE LINE BELOW FOR APPROOV ***
         //ApproovService.initialize(getApplicationContext(), "<enter-your-config-string-here>");
 
-        // *** UNCOMMENT THE LINE BELOW FOR APPROOV WITH INSTALLATION MESSAGE SIGNING ***
+        // *** UNCOMMENT THE LINES BELOW FOR APPROOV WITH INSTALLATION MESSAGE SIGNING ***
         //ApproovService.setApproovInterceptorExtensions(
         //        new ApproovDefaultMessageSigning()
         //                .setDefaultFactory(ApproovDefaultMessageSigning.generateDefaultSignatureParametersFactory())

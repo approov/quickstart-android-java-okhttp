@@ -107,4 +107,6 @@ To actually protect your APIs and/or secrets there are some further steps. Appro
 
 Note that it is possible to use both approaches side-by-side in the same app.
 
+* [MESSAGE SIGNING](https://github.com/approov/quickstart-android-java-okhttp/blob/master/MESSAGE-SIGNING.md): 
+
 See [REFERENCE](https://github.com/approov/quickstart-android-java-okhttp/blob/master/REFERENCE.md) for a complete list of all of the `ApproovService` methods.
