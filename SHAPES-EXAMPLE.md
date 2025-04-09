@@ -43,7 +43,7 @@ The `approov-service-okhttp` dependency needs to be added as follows to the `app
 
 ![App Build Gradle](readme-images/app-gradle.png)
 
-The `Maven` dependency reference is
+The Maven dependency reference is:
 
 ```
 implementation("io.approov:service.okhttp:3.4.0")
@@ -69,13 +69,13 @@ Uncomment the Approov initialization code in `io/approov/shapes/ShapesApp.java`:
 
 The Approov SDK needs a configuration string to identify the account associated with the app. It will have been provided in the Approov onboarding email (it will be something like `#123456#K/XPlLtfcwnWkzv99Wj5VmAxo4CrU267J1KlQyoz8Qo=`). Copy this and use it to replace the text `<enter-your-config-string-here>`.
 
-Next we need to use Approov when we make request for the shapes. Uncomment the code in `io/approov/shapes/MainActivity.java`:
+Next we need to use Approov when we make requests for shapes. Uncomment the code in `io/approov/shapes/MainActivity.java`:
 
 ![Approov Fetch](readme-images/approov-fetch.png)
 
 > **NOTE:** Don't forget to comment out the previous line, the one using the standard `OkHttpClient()`.
 
-You will also need to uncomment the `ApproovService` import line near the start of the file.
+Note that you also need to uncomment the `ApproovService` import line near the start of the file.
 
 Instead of using a default `OkHttpClient` we instead make the call using a client provided by the `ApproovService`. This automatically fetches an Approov token and adds it as a header to the request. It also pins the connection to the endpoint to ensure that no Man-in-the-Middle can eavesdrop on any communication being made.
 
@@ -128,7 +128,7 @@ This section shows how to add message signing as an additional layer of protecti
 
 2. Uncomment the message signing setup code in `io/approov/shapes/ShapesApp.java`. This adds an interceptor extension to the ApproovService which adds the message signature to the request automatically.
 
-![Approov Initialization](readme-images/approov-msgsign-setup-code.png)
+![Add Interceptor Extension](readme-images/approov-msgsign-setup-code.png)
 
 3. Configure Approov to add the public message signing key to the approov token. This key is used by the v5 endpoint to perform its message signature check.
 
@@ -146,7 +146,7 @@ This indicates that in addition to the app obtaining a validly signed Approov to
 
 ## SHAPES APP WITH SECRETS PROTECTION
 
-This section provides an illustration of an alternative option for Approov protection if you are not able to modify the backend to add an Approov Token check. 
+This section provides an illustration of an alternative option for Approov protection if you are not able to modify the backend to add an Approov Token check.
 
 Firstly, revert any previous change to `res/values/strings.xml` to using `https://shapes.approov.io/v1/shapes/` that simply checks for an API key. The `shapes_api_key` should also be changed to `shapes_api_key_placeholder`, removing the actual API key out of the code:
 
