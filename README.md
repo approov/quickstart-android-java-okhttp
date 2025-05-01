@@ -8,16 +8,16 @@ To follow this guide you should have received an onboarding email for a trial or
 
 ## ADDING APPROOV SERVICE DEPENDENCY
 The Approov integration is available via [`maven`](https://mvnrepository.com/repos/central). This allows inclusion into the project by simply specifying a dependency in the `gradle` files for the app.
+
 The `Maven` repository is already present in the gradle.build file so the only import you need to make is the actual service layer itself:
 
 ```
-implementation("io.approov:service.okhttp:3.4.0")
+implementation("io.approov:service.okhttp:3.4.1")
 ```
-
 
 Make sure you do a Gradle sync (by selecting `Sync Now` in the banner at the top of the modified `.gradle` file) after making these changes.
 
-This package is actually an open source wrapper layer that allows you to easily use Approov with `OkHttp`. This has a further dependency to the closed source [Approov SDK](https://central.sonatype.com/artifact/io.approov/approov-android-sdk/3.4.0).
+This package is actually an open source wrapper layer that allows you to easily use Approov with `OkHttp`. This has a further dependency to the closed source [Approov SDK](https://central.sonatype.com/artifact/io.approov/approov-android-sdk/3.4.1).
 
 
 ## MANIFEST CHANGES
@@ -28,7 +28,7 @@ The following app permissions need to be available in the manifest to use Approo
 <uses-permission android:name="android.permission.INTERNET" />
 ```
 
-Note that the minimum SDK version you can use with the Approov package is 21 (Android 5.0). 
+Note that the minimum SDK version you can use with the Approov package is 23 (Android 6.0). 
 
 Please [read this](https://approov.io/docs/latest/approov-usage-documentation/#targeting-android-11-and-above) section of the reference documentation if targeting Android 11 (API level 30) or above.
 
@@ -51,21 +51,15 @@ The `<enter-your-config-string-here>` is a custom string that configures your Ap
 
 ## USING APPROOV SERVICE
 
-> ## ⚠️ CAUTION
-> **You MUST never reuse an OkHttpClient object but instead obtain one from the ApproovService BEFORE making a request**
->
->
-> You can then make Approov enabled `OkHttp` API calls by using the `OkHttpClient` available from the `ApproovService`:
->
-> ```Java
-> OkHttpClient client = ApproovService.getOkHttpClient();
-> ```
->
-> This obtains a cached client to be used for calls that includes an interceptor that protects channel integrity (with either pinning or managed trust roots). The interceptor may also add `Approov-Token` or substitute app secret values, depending upon your integration choices. You should thus use this client for all API calls you may wish to protect.
->
-> You **must** always call this method whenever you want to make a request to ensure that you are using the most up to date client.  *Failure to do this will mean that the app is not able to dynamically change its pins.*
+You can then make Approov enabled `OkHttp` API calls by using the `OkHttpClient` available from the `ApproovService`:
 
-Approov errors will generate an `ApproovException`, which is a type of `IOException`. This may be further specialized into an `ApproovNetworkException`, indicating an issue with networking that should provide an option for a user initiated retry (which must make the new request with a call to the `getOkHttpClient` to get the latest client).
+```Java
+OkHttpClient client = ApproovService.getOkHttpClient();
+```
+
+This obtains a cached client to be used for calls that includes an interceptor that protects channel integrity (with either pinning or managed trust roots). The interceptor may also add `Approov-Token` or substitute app secret values, depending upon your integration choices. You should thus use this client for all API calls you may wish to protect.
+
+Approov errors will generate an `ApproovException`, which is a type of `IOException`. This may be further specialized into an `ApproovNetworkException`, indicating an issue with networking that should provide an option for a user initiated retry.
 
 ## CUSTOM OKHTTP BUILDER
 By default, the method gets a default client constructed with `new OkHttpClient()`. However, your existing code may use a customized client with, for instance, different timeouts or other interceptors. For example, if you have existing code:

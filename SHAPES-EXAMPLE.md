@@ -46,7 +46,7 @@ The `approov-service-okhttp` dependency needs to be added as follows to the `app
 The Maven dependency reference is:
 
 ```
-implementation("io.approov:service.okhttp:3.4.0")
+implementation("io.approov:service.okhttp:3.4.1")
 ```
 
 Make sure you do a Gradle sync (by selecting `Sync Now` in the banner at the top of the modified `build.gradle` file) after making these changes.
@@ -56,9 +56,11 @@ Note that `approov-service-okhttp` is actually an open source wrapper layer that
 ## ENSURE THE SHAPES API IS ADDED
 
 In order for Approov tokens to be generated or secrets managed for the shapes endpoint, it is necessary to inform Approov about it. Execute the following command:
+
 ```
 approov api -add shapes.approov.io
 ```
+
 Note that any Approov tokens for this domain will be automatically signed with the specific secret for this domain, rather than the normal one for your account.
 
 ## MODIFY THE APP TO USE APPROOV

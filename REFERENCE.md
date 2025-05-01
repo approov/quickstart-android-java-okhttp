@@ -47,7 +47,7 @@ Provide an ApproovDefaultMessageSigning object instantiated as shown below to en
 Passing `null` to this method will disable message signing.
 
 ## GetOkHttpClient
-Gets the default `OkHttpClient` that enables the Approov service. This adds the Approov token in a header to requests, performs and header or query parameter substitutions and also pins the connections. The `OkHttpClient` is constructed lazily on demand but is cached if there are no changes. You *MUST* always obtain the `OkHttpClient` using this method for all requests, to ensure an up to date client is used with the latest dynamic pins.
+Gets the default `OkHttpClient` that enables the Approov service. This adds the Approov token in a header to requests, performs and header or query parameter substitutions and also pins the connections. The `OkHttpClient` is constructed lazily on demand but is cached if there are no changes.
 
 ```Java
 OkHttpClient getOkHttpClient()
