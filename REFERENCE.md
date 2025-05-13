@@ -30,7 +30,7 @@ void initialize(Context context, String config, String comment)
 
 ## SetApproovInterceptorExtensions
 
-Sets the interceptor extensions callback handler. This facility was introduced to support message signing that is independent from the rest of the attestation flow. The default ApproovService layer issues no callbacks. Provide a non-null handler to add functionality to the attestation flow. The configuration used to control installation message signing is passed in the `callbacks` parameter. The behavior of the provided configuration must remain constant while in use by the ApproovService.
+Sets the interceptor extensions callback handler. This facility supports message signing that is independent from the rest of the attestation flow. The default ApproovService layer issues no callbacks. Provide a non-null handler to add functionality to the attestation flow. The configuration used to control installation message signing is passed in the `callbacks` parameter. The behavior of the provided configuration must remain constant while in use by the ApproovService. Passing `null` to this method will disable message signing.
 
 ```java
 void setApproovInterceptorExtensions(ApproovInterceptorExtensions callbacks)
@@ -44,7 +44,11 @@ Provide an ApproovDefaultMessageSigning object instantiated as shown below to en
             ApproovDefaultMessageSigning.generateDefaultSignatureParametersFactory()));
 ```
 
-Passing `null` to this method will disable message signing.
+This default setup provides a basic signature mechanism that is not specific to the requests that are issued by an app.
+
+The default signature parameter factory returned by `ApproovDefaultMessageSigning.generateDefaultSignatureParametersFactory` can be customized by calling further methods. Please refer to the code for the `SignatureParametersFactory` class in the [approov-service-okhttp](https://github.com/approov/approov-service-okhttp) repository's [`ApproovDefaultMessageSigning.java`](https://github.com/approov/approov-service-okhttp/blob/main/approov-service/src/main/java/io/approov/service/okhttp/ApproovDefaultMessageSigning.java) source file for information on the available options. Alternatively, you can extend the `SignatureParametersFactory` class and provide an object of the derived class as the argument to `ApproovDefaultMessageSigning().setDefaultFactory`.
+
+Additionally, you can provide a custom implementation of the [`ApproovInterceptorExtensions`](https://github.com/approov/approov-service-okhttp/blob/main/approov-service/src/main/java/io/approov/service/okhttp/ApproovInterceptorExtensions.java) interface to have full control of the message signing. Please see the implementation of the class `ApproovDefaultMessageSigning` in [`ApproovDefaultMessageSigning.java`](https://github.com/approov/approov-service-okhttp/blob/main/approov-service/src/main/java/io/approov/service/okhttp/ApproovDefaultMessageSigning.java) for an example.
 
 ## GetOkHttpClient
 Gets the default `OkHttpClient` that enables the Approov service. This adds the Approov token in a header to requests, performs and header or query parameter substitutions and also pins the connections. The `OkHttpClient` is constructed lazily on demand but is cached if there are no changes.
