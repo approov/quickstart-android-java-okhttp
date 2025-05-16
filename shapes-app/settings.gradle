@@ -1,1 +1,35 @@
+pluginManagement {
+    repositories {
+        google {
+            content {
+                includeGroupByRegex("com\\.android.*")
+                includeGroupByRegex("com\\.google.*")
+                includeGroupByRegex("androidx.*")
+            }
+        }
+        mavenCentral()
+        gradlePluginPortal()
+    }
+}
+dependencyResolutionManagement {
+    repositoriesMode.set(RepositoriesMode.FAIL_ON_PROJECT_REPOS)
+    repositories {
+        google()
+        mavenCentral()
+    }
+}
+
+rootProject.name = "Approov Shapes Java-OkHttp"
 include ':app'
+
+// For local development of the Approov Service OkHttp library:
+// 1. Uncomment the includeBuild statement below. This assumes that this project (quickstart-android-java-okhttp) is in
+//    the same parent directory as the included project (approov-service-okhttp).
+// 2. Add the following dependency in the app build.gradle file:
+//      implementation 'io.approov:service.okhttp'
+//
+//includeBuild('../../approov-service-okhttp') {
+//    dependencySubstitution {
+//        substitute(module("io.approov:service.okhttp")).using(project(":approov-service"))
+//    }
+//}
