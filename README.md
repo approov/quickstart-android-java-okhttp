@@ -17,7 +17,7 @@ implementation("io.approov:service.okhttp:3.5.8")
 
 Make sure you do a Gradle sync (by selecting `Sync Now` in the banner at the top of the modified `.gradle` file) after making these changes.
 
-This package is actually an open source wrapper layer that allows you to easily use Approov with `OkHttp`. This has a further dependency to the closed source [Approov SDK](https://central.sonatype.com/artifact/io.approov/approov-android-sdk/3.5.1). In some cases you may need to also add this implementation to your dependencies list to avoid build errors:
+This package is actually an open source wrapper layer that allows you to easily use Approov with `OkHttp`. This has a further dependency to the closed source [Approov SDK](https://central.sonatype.com/artifact/io.approov/approov-android-sdk/3.5.3). In some cases you may need to also add this implementation to your dependencies list to avoid build errors:
 
 ```
 implementation("io.approov:approov-android-sdk:3.5.3")
