@@ -18,25 +18,26 @@
 package io.approov.shapes.java_okhttp;
 
 import android.app.Application;
+import android.util.Log;
 
 // *** UNCOMMENT THE LINE BELOW FOR APPROOV ***
 //import io.approov.service.okhttp.ApproovService;
 
-// *** UNCOMMENT THE LINE BELOW FOR APPROOV WITH INSTALLATION MESSAGE SIGNING ***
-//import io.approov.service.okhttp.ApproovDefaultMessageSigning;
-
 public class ShapesApp extends Application {
+    private static final String TAG = ShapesApp.class.getSimpleName();
+
     @Override
     public void onCreate() {
         super.onCreate();
 
-        // *** UNCOMMENT THE LINE BELOW FOR APPROOV ***
-        //ApproovService.initialize(getApplicationContext(), "<enter-your-config-string-here>");
-
-        // *** UNCOMMENT THE LINES BELOW FOR APPROOV WITH INSTALLATION MESSAGE SIGNING ***
-        //ApproovService.setApproovInterceptorExtensions(
-        //        new ApproovDefaultMessageSigning()
-        //                .setDefaultFactory(ApproovDefaultMessageSigning.generateDefaultSignatureParametersFactory())
-        //);
+        // *** UNCOMMENT THE LINES BELOW FOR APPROOV ***
+        //try {
+        //    // your Approov account ID, from your onboarding email or "approov sdk -getConfigString"
+        //    ApproovService.initialize(getApplicationContext(), "<your-approov-account-id>");
+        //} catch (Exception e) {
+        //    // the value passed was not a valid account ID; run without Approov rather than not at all
+        //    Log.e(TAG, "Approov account ID rejected; starting in bypass mode", e);
+        //    ApproovService.initialize(getApplicationContext(), "");
+        //}
     }
 }
