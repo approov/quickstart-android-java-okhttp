@@ -1,6 +1,6 @@
-# Approov Worked Tutorial: Android Java OkHttp
+# Approov Tutorial: Android Java OkHttp
 
-This is a worked tutorial for integrating the [Approov Package for OkHttp](https://github.com/approov/approov-service-okhttp) into a native Android app written in Java. It uses a simple `Shapes` app that shows a geometric shape based on a request to an API backend protected with Approov. The steps for integrating the package into your own app are in the [Approov documentation](https://approov.io/docs/latest/); this tutorial shows them applied end to end.
+This is a tutorial for integrating the [Approov Package for OkHttp](https://github.com/approov/approov-service-okhttp) into a native Android app written in Java. It uses a simple `Shapes` app that shows a geometric shape based on a request to an API backend protected with Approov. The steps for integrating the package into your own app are in the [Approov documentation](https://approov.io/docs/latest/); this tutorial shows them applied end to end.
 
 ## WHAT YOU WILL NEED
 * Access to a trial or paid Approov account
