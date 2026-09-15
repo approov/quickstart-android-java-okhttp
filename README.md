@@ -45,7 +45,7 @@ The package is available from Maven Central, so it is added as a dependency in t
 The dependency reference is:
 
 ```
-implementation("io.approov:service.okhttp:3.7.0")
+implementation("io.approov:service.okhttp:3.8.0")
 ```
 
 Make sure you do a Gradle sync (by selecting `Sync Now` in the banner at the top of the modified `build.gradle` file) after making this change. The package brings the Approov SDK with it; nothing else needs to be added.
